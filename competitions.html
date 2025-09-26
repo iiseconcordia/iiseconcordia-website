@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>IISE Concordia: Comptetitions</title>
+      <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+      <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+      <link rel="shortcut icon" href="favicon/favicon.ico" />
+      <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+      <link rel="manifest" href="favicon/site.webmanifest" />
+      <link rel="stylesheet" href="styles.css" />
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+      <style>
+         .competitions-page .events-grid.competition-item {
+         display: grid;
+         grid-template-columns: 1fr auto auto auto auto;
+         align-items: stretch;
+         gap: 1rem;
+         border-top: 1px solid #e6e6e6;
+         cursor: pointer;
+         padding: 10px;
+         }
+         .competitions-page .events-grid.competition-item img {
+         height: 100%;
+         width: 100%;
+         object-fit: cover;
+         border-radius: 0;
+         }
+         .competitions-page .event-date,
+         .competitions-page .event-time,
+         .competitions-page .event-location {
+         font-size: 1rem;
+         display: flex;
+         align-items: center;
+         gap: 0.4rem;
+         color: #333;
+         white-space: nowrap;
+         }
+         .competitions-page .event-date {
+         margin-left: auto;
+         }
+         .competitions-page .accordion-arrow {
+         font-size: 1.4rem;
+         display: flex;
+         justify-content: flex-end;
+         align-items: center;
+         color: #444;
+         padding-left: 3rem;
+         padding-right: 0.5rem;
+         cursor: pointer;
+         }
+         .competitions-page .accordion-arrow i.rotated {
+         transform: rotate(180deg);
+         transition: transform 0.3s ease;
+         }
+         .competitions-page .accordion-content {
+         grid-column: 1 / -1;
+         display: none;
+         padding: 1rem 0 0;
+         font-size: 0.95rem;
+         color: #444;
+         line-height: 1.5;
+         margin-bottom: 2rem;
+         }
+         .competitions-page .accordion-content.show {
+         display: block;
+         }
+         .competitions-page .competition-item img {
+         height: 100px;
+         width: auto;
+         object-fit: contain;
+         border-radius: 0;
+         align-self: stretch;
+         }
+         .competitions-page .team-header {
+         margin-top: 5rem;
+         text-align: center;
+         }
+         .competitions-page .team-header .page-title {
+         font-size: 3.5rem;
+         font-family: 'Playfair Display', serif;
+         font-weight: 700;
+         margin-bottom: 2rem;
+         }
+         .competitions-page .team-header p {
+         max-width: 950px;
+         margin: 0 auto;
+         font-size: 1.15rem;
+         line-height: 1.7;
+         }
+         .competitions-page .section-title {
+         text-align: center;
+         font-family: 'Playfair Display', serif;
+         font-size: 2.5rem;
+         margin-bottom: 2rem;
+         }
+         .competitions-page .events-grid.competition-item:not(.with-image) a.event-title {
+         font-size: 1.3rem;
+         font-weight: 700;
+         text-decoration: none;
+         color: #333;
+         transition: color 0.3s ease;
+         pointer-events: auto;
+         display: inline-block;
+         }
+         .competitions-page .events-grid.competition-item:not(.with-image) a.event-title:hover {
+         color: #82283d;
+         }
+         .competitions-page h2 {
+         margin-top: 0.5rem !important; /* adjust as needed */
+         }
+         .competition-item.with-image {
+         display: grid !important;
+         grid-template-columns: auto 1fr auto !important;
+         align-items: center !important;
+         gap: 2rem !important;
+         padding: 1.5rem !important;
+         border-top: 1px solid #ddd;
+         }
+         .competition-item.with-image img {
+         max-width: 250px !important;
+         height: auto !important;
+         width: auto !important;
+         object-fit: contain !important;
+         justify-self: start !important;
+         display: block !important;
+         border-radius: 0 !important;
+         }
+         .competition-item.with-image .event-title {
+         font-size: 2rem !important;
+         font-weight: 700;
+         color: #333;
+         text-align: center !important;
+         justify-self: center !important;
+         margin: 0 auto;
+         pointer-events: none; /* <-- REMOVE THIS LINE */
+         }
+         .competition-item.with-image .accordion-arrow {
+         font-size: 1.5rem;
+         color: #333;
+         display: flex;
+         align-items: center;
+         justify-self: end !important;
+         cursor: pointer;
+         }
+         .competition-item.with-image .accordion-arrow i.rotated {
+         transform: rotate(180deg);
+         transition: transform 0.3s ease;
+         }
+         .competition-item.with-image .accordion-content {
+         padding-top: 1rem;
+         font-size: 1rem;
+         color: #444;
+         line-height: 1.5;
+         display: none;
+         grid-column: 1 / -1;
+         }
+         .competition-item.with-image .accordion-content.show {
+         display: block;
+         }
+         .competition-item.with-image .competition-icons {
+         margin-top: 1.5rem;
+         display: flex;
+         flex-direction: column;
+         gap: 0.75rem;
+         font-size: 1.1rem;
+         list-style: none;
+         padding: 0;
+         }
+         .competition-item.with-image .competition-icons li {
+         display: flex;
+         align-items: center;
+         gap: 0.8rem;
+         font-weight: 500;
+         color: #333;
+         }
+         .competition-item.with-image .competition-icons i {
+         font-size: 1.2rem;
+         width: 1.5rem;
+         text-align: center;
+         }
+         .competition-features {
+         margin-top: 1rem;
+         font-size: 1rem;
+         color: #555;
+         display: grid;
+         grid-template-columns: 0.5fr 0.5fr;
+         column-gap: 1.5rem; /* ↓ reduced from 1.5rem */
+         row-gap: 0.5rem;     /* optional: tighter vertical spacing */
+         line-height: 1.5;
+         text-align: left;
+         }
+         .competition-features i {
+         margin-right: 0.5rem;
+         color: #333;
+         min-width: 20px;
+         }
+         .competition-item.with-image.active {
+         border: 2px solid #d4d4d4;
+         border-radius: 12px;
+         background: #f9f9f9;
+         box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+         transition: all 0.3s ease;
+         }
+         .case-tiers {
+         margin-top: 2rem;
+         display: flex;
+         flex-direction: column;
+         gap: 2rem;
+         }
+         .tier {
+         display: grid;
+         grid-template-columns: auto 1fr;
+         align-items: center;
+         background: #fafafa;
+         padding: 1.5rem;
+         border-radius: 10px;
+         box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+         gap: 1.5rem;
+         }
+         .tier-content {
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         }
+         .tier-number {
+         font-size: 2rem;
+         color: white;
+         font-weight: bold;
+         width: 60px;
+         height: 60px;
+         min-width: 60px;
+         border-radius: 6px;
+         display: flex;
+         align-items: center;
+         align-self: center; 
+         justify-content: center;
+         }
+         .tier-content h3 {
+         margin: 0 auto;
+         text-align: center;
+         font-size: 1.2rem;
+         text-transform: uppercase;
+         color: #7c2639;
+         letter-spacing: 1px;
+         }
+         .tier-content p {
+         margin: 0.25rem 0;
+         font-size: 1rem;
+         display: flex;
+         align-items: center;
+         gap: 0.5rem;
+         }
+         .tier-content i {
+         color: #444;
+         min-width: 20px;
+         }
+         .cta-outline {
+         display: inline-block;
+         padding: 0.6rem 1.5rem;
+         border: 2px solid #742b3b;
+         color: #742b3b;
+         font-weight: 600;
+         font-size: 1rem;
+         text-decoration: none;
+         border-radius: 999px; /* makes it fully pill-shaped */
+         transition: background-color 0.3s ease, color 0.3s ease;
+         }
+         .cta-outline:hover {
+         background-color: #742b3b;
+         color: white;
+         }
+         @media (max-width: 768px) {
+         .competitions-page .events-grid.competition-item {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         gap: 0.75rem;
+         padding: 1.5rem 1rem;
+         text-align: center;
+         }
+         .competition-item.with-image img {
+         width: 1000px !important;
+         height: auto !important;
+         object-fit: cover !important;
+         border-radius: 0 !important;
+         margin: 0 auto !important;
+         }
+         .competitions-page .event-title {
+         font-size: 1.6rem;
+         font-weight: 600;
+         margin: 1rem 0 0.5rem;
+         color: #555;
+         text-align: center;
+         }
+         .competitions-page .event-date,
+         .competitions-page .event-time,
+         .competitions-page .event-location {
+         display: block;
+         text-align: center;
+         margin: 0;
+         font-size: 1rem;
+         color: #333;
+         }
+         .competitions-page .accordion-arrow {
+         display: flex;
+         justify-content: center !important;
+         align-items: center;
+         width: 100%;
+         padding: 0.25rem;
+         margin-top: 0.5rem;
+         }
+         .competition-item.with-image {
+         grid-template-columns: 1fr !important;
+         text-align: center !important;
+         justify-items: center !important;
+         }
+         .competition-item.with-image .event-title {
+         font-size: 1.6rem;
+         text-align: center;
+         margin: 1rem 0 0.5rem;
+         }
+         .competition-item.with-image .accordion-arrow {
+         justify-content: center !important;
+         display: flex;
+         width: 100%;
+         }
+         .competition-item.with-image .competition-icons li {
+         text-align: left !important;
+         justify-content: flex-start !important;
+         align-items: flex-start !important;
+         }
+         .tier {
+         flex-direction: column !important;
+         align-items: center !important;
+         text-align: center !important;
+         }
+         .tier-number {
+         margin-bottom: 1rem;
+         }
+         .tier-content {
+         align-items: flex-start;
+         text-align: left;
+         }
+         .tier-content p {
+         justify-content: flex-start;
+         text-align: left;
+         }
+         }
+      </style>
+   </head>
+   <body class="light-header competitions-page">
+      <!-- HEADER -->
+      <header class="site-header" role="banner">
+         <a class="iise" href="index.html">
+         <img class="iise-logo" src="assets/logo.png" alt="IISE Concordia logo">
+         <span class="iise-name">IISE Concordia</span>
+         </a>
+         <div class="edge-rail">
+            <button id="edgeMenuBtn" class="edge-menu">
+            <span class="hamburger"><span></span><span></span></span>
+            <span class="edge-menu-label">Menu</span>
+            </button>
+         </div>
+      </header>
+      <!-- OVERLAY -->
+      <div class="overlay" aria-hidden="true">
+         <div id="overlayHoverBg" class="overlay-hover-bg"></div>
+         <div id="overlayTint" class="overlay-tint-layer"></div>
+         <div class="overlay-inner">
+            <div class="overlay-header">
+               <a href="index.html" class="overlay-branding-link">
+                  <div class="overlay-branding">
+                     <img src="assets/logo.png" alt="Logo" class="overlay-logo" />
+                     <span class="overlay-name">IISE Concordia</span>
+                  </div>
+               </a>
+               <button class="overlay-close" aria-label="Close menu">&times;</button>
+            </div>
+            <div class="overlay-content">
+               <div class="overlay-column">
+                  <a href="about.html" data-bg="assets/menu/about.jpg">About</a>
+                  <a href="team-2024-2025.html" data-bg="assets/menu/team.jpg">The Team</a>
+                  <a href="sponsors.html" data-bg="assets/menu/sponsors.jpg">Sponsors</a>
+                  <a href="podcast.html" data-bg="assets/menu/podcast.png">INDU Talks</a>
+                  <!--<a href="/media.html" data-bg="assets/menu-bg-team.jpg">Media</a>-->
+               </div>
+               <div class="overlay-column">
+                  <!--<a href="#">Events</a>-->
+                  <a href="industry-week-2025.html" data-bg="assets/menu/indu-week.jpg">Industry Week</a>
+                  <a href="conference.html" data-bg="assets/menu/conference.png">Conference</a>
+                  <a href="competitions.html" data-bg="assets/menu/tech-paper-comp.png">Competitions</a>
+               </div>
+            </div>
+            <div class="overlay-footer social-links">
+               <a href="https://www.instagram.com/iiseconcordiachapter/" target="_blank" aria-label="Instagram">
+               <i class="fab fa-instagram"></i>
+               </a>
+               <a href="https://www.facebook.com/people/IISE-Concordia-Chapter-IISE-Chapitre-Concordia/61560653019252/" target="_blank" aria-label="Facebook">
+               <i class="fab fa-facebook"></i>
+               </a>
+               <a href="https://www.linkedin.com/company/iiseconcordiachapter/" target="_blank" aria-label="LinkedIn">
+               <i class="fab fa-linkedin"></i>
+               </a>
+               <a href="https://www.tiktok.com/@iise.concordia?is_from_webapp=1&sender_device=pc" target="_blank" aria-label="TikTok">
+               <i class="fab fa-tiktok"></i>
+               </a>
+               <a href="https://www.youtube.com/@IISEConcordiaChapter" target="_blank" aria-label="YouTube">
+               <i class="fab fa-youtube"></i>
+               </a>
+               <a href="mailto:webmaster@iiseconcordia.com" target="_blank" aria-label="Email">
+               <i class="fas fa-envelope"></i>
+               </a>
+            </div>
+         </div>
+      </div>
+      <main class="team-wrapper">
+         <!-- PAGE TITLE -->
+         <section class="team-header">
+            <h1 class="page-title">Academic Competitions</h1>
+            <p>
+               IISE Concordia hosts various competitions every year in collaboration with 
+               companies and occasionally with other associations. The four main competitions are 
+               Case Competition, Simulation Competition, Theoretical Competition and Technical Competition, 
+               which are organized by the VP Competitions. This allows students to gain technical and soft 
+               skills through extra-curricular activities.  
+            </p>
+            <br>
+            <p>
+               Participants could have the opportunity to be selected to represent Concordia at the 
+               National IISE Student Conference. Those selected to compete at the national level receive training 
+               from IISE resources organized by the VP Competitions.
+            </p>
+         </section>
+         <!-- UPCOMING -->
+         <section class="events">
+            <div class="events-wrap">
+               <h2 class="section-title">Upcoming</h2>
+               <ul class="events-list competitions-page">
+                  <li class="events-grid competition-item">
+                     <a class="event-title" href="tecsys-case-comp-2025.html">Tecsys Case Competition</a>
+                     <div class="event-date"><i class="fas fa-calendar"></i> Sept 29, 2025</div>
+                     <div class="event-time"><i class="fas fa-clock"></i> 1:00 PM - 7:00 PM</div>
+                     <div class="event-location"><i class="fas fa-location-dot"></i> Hall 8th</div>
+                     <div class="accordion-arrow"><i class="fas fa-chevron-down"></i></div>
+                     <div class="accordion-content">
+                        5 groups of 4 will compete on a case study created by Tecsys. 
+                        The case study will be given on the day of the competition. 
+                        Competitors will have 3 hours to solve the case study and create a 
+                        presentation for it that will be shown to Tecsys judges. 
+                        After all presentations, a winner will be chosen and rewarded!
+                        <p></p>
+                        <p>
+                           <a href="tecsys-case-comp-2025.html" class="cta-outline">Learn More</a>
+                        </p>
+                     </div>
+                  </li>
+                  <li class="events-grid competition-item">
+                     <a class="event-title" href="theo-comp-2025.html">Theoretical Competition</a>
+                     <div class="event-date"><i class="fas fa-calendar"></i> Oct 2, 2025</div>
+                     <div class="event-time"><i class="fas fa-clock"></i> 1:00 PM - 3:00 PM</div>
+                     <div class="event-location"><i class="fas fa-location-dot"></i> EV</div>
+                     <div class="accordion-arrow"><i class="fas fa-chevron-down"></i></div>
+                     <div class="accordion-content">
+                        Students will compete to showcase their theory knowledge. 
+                        Questions will be based on the courses they have taken. 
+                        Questions will be in the form of an MCQ. 
+                        The highest scoring individual will be rewarded!
+                        <p></p>
+                        <p>
+                           <a href="theo-comp-2025.html" class="cta-outline">Learn More</a>
+                        </p>
+                     </div>
+                  </li>
+               </ul>
+            </div>
+         </section>
+         <!-- COMPETITION INFORMATION -->
+         <section class="events">
+            <div class="events-wrap">
+               <h2 class="section-title">Competition Information</h2>
+               <ul class="events-list competitions-page">
+                  <!-- CASE COMPETITION -->
+                  <li class="events-grid competition-item with-image">
+                     <img src="assets/competitions/case-comp2.JPG" alt="Case Competition">
+                     <div class="event-title">Case Competition</div>
+                     <div class="accordion-arrow"><i class="fas fa-chevron-down"></i></div>
+                     <div class="accordion-content">
+                        <div class="competition-features">
+                           <div><i class="fas fa-file-alt"></i> Business-Related Problem</div>
+                           <div><i class="fas fa-users"></i> Teams of Four</div>
+                           <div><i class="fas fa-lightbulb"></i> Analyze and Solve</div>
+                           <div><i class="fas fa-stopwatch"></i> Beat the Clock</div>
+                           <div><i class="fas fa-chalkboard-teacher"></i> Presentation Required</div>
+                           <div><i class="fas fa-building"></i> Present Solutions to Expert Judges</div>
+                        </div>
+                        <div class="case-tiers">
+                           <!-- TIER 1 -->
+                           <div class="tier">
+                              <div class="tier-number" style="background:#1b2a4e;">1</div>
+                              <div class="tier-content">
+                                 <h3>IISE Concordia Case Competition</h3>
+                                 <p><i class="fas fa-map-marker-alt"></i> Concordia University</p>
+                                 <p><i class="fas fa-trophy"></i> The winner will represent Concordia University at the National Conference Case Competition</p>
+                              </div>
+                           </div>
+                           <!-- TIER 2 -->
+                           <div class="tier">
+                              <div class="tier-number" style="background:#7c2639;">2</div>
+                              <div class="tier-content">
+                                 <h3>National Conference Case Competition</h3>
+                                 <p><i class="fas fa-map-marker-alt"></i> Canada - Must be able to attend the National Conference</p>
+                                 <p><i class="fas fa-chalkboard-teacher"></i> The 1st place winning team of the IISE Concordia Competition will receive training organized by us</p>
+                                 <p><i class="fas fa-clock"></i> The competing team has around 4 hours to solve the case and then must present the solution to the judges</p>
+                                 <p><i class="fas fa-coins"></i> Opportunity to win cash prizes</p>
+                              </div>
+                           </div>
+                           <!-- TIER 3 -->
+                           <div class="tier">
+                              <div class="tier-number" style="background:#f4c542;">3</div>
+                              <div class="tier-content">
+                                 <h3>International Case Competition</h3>
+                                 <p><i class="fas fa-map-marker-alt"></i> USA</p>
+                                 <p><i class="fas fa-trophy"></i> The 1st place winning individual of the National Case Competition has the chance to compete at the International Competition</p>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </li>
+                  <!-- SIMULATION COMPETITION -->
+                  <li class="events-grid competition-item with-image">
+                     <img src="assets/competitions/sim-comp.jpg" alt="Simulation Competition">
+                     <div class="event-title">Simulation Competition</div>
+                     <div class="accordion-arrow"><i class="fas fa-chevron-down"></i></div>
+                     <div class="accordion-content">
+                        <div class="competition-features">
+                           <div><i class="fas fa-file-alt"></i> Engineering-Related Problem</div>
+                           <div><i class="fas fa-users"></i> Teams of Three or Four</div>
+                           <div><i class="fas fa-lightbulb"></i> Analyze and Solve</div>
+                           <div><i class="fas fa-cogs"></i> Apply Simulation of Industrial Systems material (INDU311)</div>
+                           <div><i class="fas fa-chalkboard-teacher"></i> Presentation Required</div>
+                           <div><i class="fas fa-building"></i> Present Solutions to Expert Judges</div>
+                        </div>
+                        <div class="case-tiers">
+                           <!-- TIER 1 -->
+                           <div class="tier">
+                              <div class="tier-number" style="background:#1b2a4e;">1</div>
+                              <div class="tier-content">
+                                 <h3>IISE Concordia Simulation Competition</h3>
+                                 <p><i class="fas fa-map-marker-alt"></i> Concordia University</p>
+                                 <p><i class="fas fa-trophy"></i> The winner will represent Concordia University at the National Conference Case Competition</p>
+                              </div>
+                           </div>
+                           <!-- TIER 2 -->
+                           <div class="tier">
+                              <div class="tier-number" style="background:#7c2639;">2</div>
+                              <div class="tier-content">
+                                 <h3>National Conference Simulation Competition</h3>
+                                 <p><i class="fas fa-map-marker-alt"></i> Canada - Must be able to attend the National Conference</p>
+                                 <p><i class="fas fa-chalkboard-teacher"></i> The 1st place winning team of the IISE Concordia Competition will receive training organized by us</p>
+                                 <p><i class="fas fa-clock"></i> The Simulation case is revealed to the competing team 6 weeks before submission deadline, the team works on the solution and present it to the judges</p>
+                                 <p><i class="fas fa-coins"></i> The 1st place winning individual of the National Case Competition has the chance to compete at the International Competition</p>
+                              </div>
+                           </div>
+                           <!-- TIER 3 -->
+                           <div class="tier">
+                              <div class="tier-number" style="background:#f4c542;">3</div>
+                              <div class="tier-content">
+                                 <h3>International Case Competition</h3>
+                                 <p><i class="fas fa-map-marker-alt"></i> USA</p>
+                                 <p><i class="fas fa-trophy"></i> The 1st place winning individual of the National Case Competition has the chance to compete at the International Competition</p>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </li>
+                  <!-- TECHNICAL PAPER -->
+                  <li class="events-grid competition-item with-image">
+                     <img src="assets/competitions/tech-paper-comp.png" alt="Technical Paper">
+                     <div class="event-title">Technical Paper</div>
+                     <div class="accordion-arrow"><i class="fas fa-chevron-down"></i></div>
+                     <div class="accordion-content">
+                        <div class="competition-features">
+                           <div><i class="fas fa-file-alt"></i> Research from Academic Courses or Problem Faced on Internship</div>
+                           <div><i class="fas fa-user"></i> Teams of One</div>
+                           <div><i class="fas fa-lightbulb"></i> Analyze and Solve</div>
+                           <div><i class="fas fa-pen-nib"></i> Choose Your Own Topic</div>
+                           <div><i class="fas fa-chalkboard-teacher"></i> Presentation Required</div>
+                           <div><i class="fas fa-building"></i> Present Solutions to Expert Judges</div>
+                        </div>
+                        <div class="case-tiers">
+                           <!-- TIER 1 -->
+                           <div class="tier">
+                              <div class="tier-number" style="background:#1b2a4e;">1</div>
+                              <div class="tier-content">
+                                 <h3>IISE Concordia Technical Competition</h3>
+                                 <p><i class="fas fa-map-marker-alt"></i> Concordia University</p>
+                                 <p><i class="fas fa-trophy"></i> The winner will represent Concordia University at the National Conference Technical Competition</p>
+                              </div>
+                           </div>
+                           <!-- TIER 2 -->
+                           <div class="tier">
+                              <div class="tier-number" style="background:#7c2639;">2</div>
+                              <div class="tier-content">
+                                 <h3>National Conference Technical Competition</h3>
+                                 <p><i class="fas fa-map-marker-alt"></i> Canada - Must be able to attend the National Conference</p>
+                                 <p><i class="fas fa-chalkboard-teacher"></i> The 1st place winning individual of the IISE Concordia Competition will receive training organized by us.</p>
+                                 <p><i class="fas fa-file-chart-column"></i> The competing individual will submit a technical paper for a certain deadline and will then present this paper at the National Conference</p>
+                                 <p><i class="fas fa-coins"></i> Opportunity to win cash prizes</p>
+                              </div>
+                           </div>
+                           <!-- TIER 3 -->
+                           <div class="tier">
+                              <div class="tier-number" style="background:#f4c542;">3</div>
+                              <div class="tier-content">
+                                 <h3>International Technical Competition</h3>
+                                 <p><i class="fas fa-map-marker-alt"></i> USA</p>
+                                 <p><i class="fas fa-trophy"></i> The 1st place winning individual of the National Theoretical Competition has the chance to compete at the International Competition.</p>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </li>
+                  <!-- THEORETICAL EXAM -->
+                  <li class="events-grid competition-item with-image">
+                     <img src="assets/competitions/theoretical-exam.jpg" alt="Theoretical Exam">
+                     <div class="event-title">Theoretical Exam</div>
+                     <div class="accordion-arrow"><i class="fas fa-chevron-down"></i></div>
+                     <div class="accordion-content">
+                        <div class="competition-features">
+                           <div><i class="fas fa-file-alt"></i> Industrial Engineering Concepts from First to Fourth Year</div>
+                           <div><i class="fas fa-users"></i> Teams of Four</div>
+                           <div><i class="fas fa-lightbulb"></i> Solve</div>
+                           <div><i class="fas fa-stopwatch"></i> Beat the Clock</div>
+                           <div><i class="fas fa-book-open"></i> Open Book</div>
+                        </div>
+                        <div class="case-tiers">
+                           <!-- TIER 1 -->
+                           <div class="tier">
+                              <div class="tier-number" style="background:#1b2a4e;">1</div>
+                              <div class="tier-content">
+                                 <h3>IISE Concordia Theoretical Competition</h3>
+                                 <p><i class="fas fa-map-marker-alt"></i> Concordia University</p>
+                                 <p><i class="fas fa-trophy"></i> The winner will represent Concordia University at the National Conference Case Competition</p>
+                              </div>
+                           </div>
+                           <!-- TIER 2 -->
+                           <div class="tier">
+                              <div class="tier-number" style="background:#7c2639;">2</div>
+                              <div class="tier-content">
+                                 <h3>National Conference Theoretical Competition</h3>
+                                 <p><i class="fas fa-map-marker-alt"></i> Canada - Must be able to attend the National Conference</p>
+                                 <p><i class="fas fa-chalkboard-teacher"></i> The 1st place winning team of the IISE Concordia Competition will receive training organized by us</p>
+                                 <p><i class="fas fa-clock"></i> The competing team will solve the exam during an allocated time at the Conference</p>
+                                 <p><i class="fas fa-coins"></i> Opportunity to win cash prizes</p>
+                              </div>
+                           </div>
+                           <!-- TIER 3 -->
+                           <div class="tier">
+                              <div class="tier-number" style="background:#f4c542;">3</div>
+                              <div class="tier-content">
+                                 <h3>International Case Competition</h3>
+                                 <p><i class="fas fa-map-marker-alt"></i> USA</p>
+                                 <p><i class="fas fa-trophy"></i> The 1st place winning individual of the National Case Competition has the chance to compete at the International Competition</p>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </li>
+               </ul>
+            </div>
+         </section>
+      </main>
+      <!-- FOOTER -->
+      <footer class="site-footer">
+         <div class="footer-content">
+            <div class="footer-left">
+               <img src="assets/logo.png" alt="IISE Logo" class="footer-logo">
+               <span class="footer-name">IISE Concordia</span>
+            </div>
+            <div class="footer-right">
+               <div class="footer-socials">
+                  <a href="https://www.instagram.com/iiseconcordiachapter/" target="_blank"><i class="fab fa-instagram"></i></a>
+                  <a href="https://www.facebook.com/people/IISE-Concordia-Chapter-IISE-Chapitre-Concordia/61560653019252/" target="_blank"><i class="fab fa-facebook"></i></a>
+                  <a href="https://www.linkedin.com/company/iiseconcordiachapter/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                  <a href="https://www.tiktok.com/@iise.concordia" target="_blank"><i class="fab fa-tiktok"></i></a>
+                  <a href="https://www.youtube.com/@IISEConcordiaChapter" target="_blank"><i class="fab fa-youtube"></i></a>
+                  <a href="mailto:webmaster@iiseconcordia.com"><i class="fas fa-envelope"></i></a>
+               </div>
+               <div class="footer-copy">&copy; 2025–2026 IISE Concordia Chapter. All rights reserved.</div>
+            </div>
+         </div>
+      </footer>
+      <script src="script.js"></script>
+      <!-- ACCORDION JS -->
+      <script>
+         document.querySelectorAll('.competition-item').forEach((item) => {
+           const content = item.querySelector('.accordion-content');
+           const arrowIcon = item.querySelector('.accordion-arrow i');
+         
+           item.addEventListener('click', (e) => {
+             if (e.target.closest('a')) return;
+         
+             const isOpen = content.classList.contains('show');
+             
+             // Close all others
+             document.querySelectorAll('.competition-item').forEach((el) => {
+               el.querySelector('.accordion-content')?.classList.remove('show');
+               el.querySelector('.accordion-arrow i')?.classList.remove('rotated');
+               el.classList.remove('active');
+             });
+         
+             // If this one wasn't open, open it now
+             if (!isOpen) {
+               content.classList.add('show');
+               arrowIcon.classList.add('rotated');
+               item.classList.add('active');
+             }
+           });
+         });
+      </script>
+   </body>
+</html>

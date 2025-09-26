@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>IISE Concordia: INDU Talks</title>
+      <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+      <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+      <link rel="shortcut icon" href="favicon/favicon.ico" />
+      <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+      <link rel="manifest" href="favicon/site.webmanifest" />
+      <link rel="stylesheet" href="styles.css" />
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+      <style>
+         .podcast-page .sponsors-rail .sponsor-card img {
+         height: 65px;
+         width: auto;
+         }
+         .podcast-page .events-grid.podcast-item {
+         display: grid;
+         grid-template-columns: 100px 1fr auto auto auto auto;
+         align-items: stretch;
+         gap: 1rem;
+         border-top: 1px solid #e6e6e6;
+         cursor: pointer;
+         padding: 10px;
+         }
+         .podcast-page .events-grid.podcast-item img {
+         height: 100%;
+         width: 100%;
+         object-fit: cover; 
+         border-radius: 0;
+         }
+         .podcast-page .event-date,
+         .podcast-page .event-time,
+         .podcast-page .event-location {
+         font-size: 1rem;
+         display: flex;
+         align-items: center;
+         gap: 0.4rem;
+         color: #333;
+         white-space: nowrap;
+         }
+         .podcast-page .event-date {
+         margin-left: auto; 
+         }
+         .podcast-page .event-type {
+         justify-self: end;
+         font-size: 0.85rem;
+         font-weight: 600;
+         border: 2px solid #000;
+         padding: 4px 12px;
+         border-radius: 999px;
+         text-transform: uppercase;
+         white-space: nowrap;
+         }
+         .podcast-page .accordion-arrow {
+         display: flex;
+         justify-content: flex-end;
+         font-size: 0.95rem;
+         color: #444;
+         cursor: pointer;
+         }
+         .podcast-page .events-list {
+         list-style: none;
+         padding: 0;
+         margin: 0;
+         }
+         .podcast-page .event-title {
+         font-size: 1.1rem;
+         font-weight: 600;
+         color: #555;
+         text-decoration: none;
+         transition: color 0.3s ease;
+         pointer-events: auto;
+         align-self: center;       
+         display: inline-block;    
+         white-space: normal;    
+         }
+         .podcast-page .event-title:hover {
+         color: #82283d;
+         }
+         .podcast-page .accordion-arrow {
+         font-size: 1.4rem;
+         display: flex;
+         justify-content: flex-end;
+         align-items: center;
+         color: #444;
+         padding-left: 3rem;     
+         padding-right: 0.5rem;  
+         }
+         .podcast-page .accordion-arrow i.rotated {
+         transform: rotate(180deg);
+         transition: transform 0.3s ease;
+         }
+         .podcast-page .accordion-content {
+         grid-column: 1 / -1; 
+         display: none;
+         padding: 1rem 0 0;
+         font-size: 0.95rem;
+         color: #444;
+         line-height: 1.5;
+         }
+         .podcast-page .accordion-content.show {
+         display: block;
+         }
+         .podcast-page .podcast-item img {
+         height: 100px;
+         width: auto;              
+         object-fit: contain;     
+         border-radius: 0;
+         align-self: stretch;
+         }
+         @media (max-width: 768px) {
+         .podcast-page .events-grid.podcast-item {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         gap: 0.75rem;
+         padding: 1.5rem 1rem;
+         text-align: center;
+         }
+         .podcast-page .podcast-item img {
+         height: 300px !important;
+         width: 300px !important;
+         object-fit: cover !important;
+         border-radius: 0px !important;
+         align-self: center !important;
+         }
+         .podcast-page .event-title {
+         font-size: 1.2rem;
+         font-weight: 600;
+         margin: 0.5rem 0;
+         color: #555;
+         }
+         .podcast-page .event-date,
+         .podcast-page .event-time,
+         .podcast-page .event-location {
+         display: block;
+         text-align: center;
+         margin: 0;
+         font-size: 1rem;
+         color: #333;
+         }
+         .podcast-page .event-date::after,
+         .podcast-page .event-time::after,
+         .podcast-page .event-location::after {
+         content: "";
+         }
+         .podcast-page .accordion-arrow {
+         justify-content: center;
+         padding: 0.25rem;
+         }
+         }
+      </style>
+   </head>
+   <body class="light-header podcast-page">
+      <!-- HEADER -->
+      <header class="site-header" role="banner">
+         <a class="iise" href="index.html">
+         <img class="iise-logo" src="assets/logo.png" alt="IISE Concordia logo">
+         <span class="iise-name">IISE Concordia</span>
+         </a>
+         <div class="edge-rail">
+            <button id="edgeMenuBtn" class="edge-menu">
+            <span class="hamburger"><span></span><span></span></span>
+            <span class="edge-menu-label">Menu</span>
+            </button>
+         </div>
+      </header>
+      <!-- OVERLAY -->
+      <div class="overlay" aria-hidden="true">
+         <div id="overlayHoverBg" class="overlay-hover-bg"></div>
+         <div id="overlayTint" class="overlay-tint-layer"></div>
+         <div class="overlay-inner">
+            <div class="overlay-header">
+               <a href="index.html" class="overlay-branding-link">
+                  <div class="overlay-branding">
+                     <img src="assets/logo.png" alt="Logo" class="overlay-logo" />
+                     <span class="overlay-name">IISE Concordia</span>
+                  </div>
+               </a>
+               <button class="overlay-close" aria-label="Close menu">&times;</button>
+            </div>
+            <div class="overlay-content">
+               <div class="overlay-column">
+                  <a href="about.html" data-bg="assets/menu/about.jpg">About</a>
+                  <a href="team-2024-2025.html" data-bg="assets/menu/team.jpg">The Team</a>
+                  <a href="sponsors.html" data-bg="assets/menu/sponsors.jpg">Sponsors</a>
+                  <a href="podcast.html" data-bg="assets/menu/podcast.png">INDU Talks</a>
+                  <!--<a href="/media.html" data-bg="assets/menu-bg-team.jpg">Media</a>-->
+               </div>
+               <div class="overlay-column">
+                  <!--<a href="#">Events</a>-->
+                  <a href="industry-week-2025.html" data-bg="assets/menu/indu-week.jpg">Industry Week</a>
+                  <a href="conference.html" data-bg="assets/menu/conference.png">Conference</a>
+                  <a href="competitions.html" data-bg="assets/menu/tech-paper-comp.png">Competitions</a>
+               </div>
+            </div>
+            <div class="overlay-footer social-links">
+               <a href="https://www.instagram.com/iiseconcordiachapter/" target="_blank" aria-label="Instagram">
+               <i class="fab fa-instagram"></i>
+               </a>
+               <a href="https://www.facebook.com/people/IISE-Concordia-Chapter-IISE-Chapitre-Concordia/61560653019252/" target="_blank" aria-label="Facebook">
+               <i class="fab fa-facebook"></i>
+               </a>
+               <a href="https://www.linkedin.com/company/iiseconcordiachapter/" target="_blank" aria-label="LinkedIn">
+               <i class="fab fa-linkedin"></i>
+               </a>
+               <a href="https://www.tiktok.com/@iise.concordia?is_from_webapp=1&sender_device=pc" target="_blank" aria-label="TikTok">
+               <i class="fab fa-tiktok"></i>
+               </a>
+               <a href="https://www.youtube.com/@IISEConcordiaChapter" target="_blank" aria-label="YouTube">
+               <i class="fab fa-youtube"></i>
+               </a>
+               <a href="mailto:webmaster@iiseconcordia.com" target="_blank" aria-label="Email">
+               <i class="fas fa-envelope"></i>
+               </a>
+            </div>
+         </div>
+      </div>
+      <main class="team-wrapper">
+         <!-- 1. TITLE + DESCRIPTION -->
+         <section class="team-header">
+            <h1 class="page-title">INDU Talks</h1>
+            <p style="max-width: 700px; margin: 0 auto; font-size: 1.2rem;">
+               Fellow engineering students of Concordia University, IISE Concordia 
+               Chapter is proud to present our IISE podcast “INDU Talks”. From this podcast, 
+               you will be able to gain insight on engineering topics through our engineering 
+               series and to entertain yourself through our casual episode series. 
+               Stay tuned on all our social media platforms for our upcoming episodes and 
+               don't forget to listen to our podcast for a taste of engineering life.
+            </p>
+         </section>
+         <!-- 2. PLATFORM ICONS -->
+         <section class="sponsors-rail">
+            <a href="https://open.spotify.com/show/17iDoYL3iC5nAf0ILn5Wb8" target="_blank" class="sponsor-card"><img src="assets/podcast/logo/spotify.svg" alt="Spotify"></a>
+            <a href="https://podcasts.apple.com/ca/podcast/indu-talks/id1585170227" target="_blank" class="sponsor-card"><img src="assets/podcast/logo/apple.svg" alt="Apple"></a>
+            <a href="https://creators.spotify.com/pod/profile/iiseconcordia/" target="_blank" class="sponsor-card"><img src="assets/podcast/logo/anchor.svg" alt="Anchor"></a>
+            <a href="https://overcast.fm/+zMn5cuqYY" target="_blank" class="sponsor-card"><img src="assets/podcast/logo/overcast.svg" alt="Overcast"></a>
+            <a href="https://pocketcasts.com/podcast/indu-talks/be1de390-f39e-0139-d4ea-0acc26574db2" target="_blank" class="sponsor-card"><img src="assets/podcast/logo/pocketcast.svg" alt="Pocket Casts"></a>
+            <a href="https://www.podchaser.com/podcasts/indu-talks-4098310?" target="_blank" class="sponsor-card"><img src="assets/podcast/logo/radiopublic.svg" alt="Radio Public"></a>
+         </section>
+         <!-- 3. UPCOMING -->
+         <section class="events">
+            <div class="events-wrap">
+               <h2 class="section-title">Upcoming</h2>
+               <ul class="events-list podcast-page">
+                  <li class="events-grid podcast-item">
+                     <img src="assets/podcast/prof-onur.jpg" alt="Upcoming Guest">
+                     <a class="event-title" href="INDU-Talks-2025.html">Lean Manufacturing with Professor Onur</a>
+                     <div class="event-date"><i class="fas fa-calendar"></i> Oct 3, 2025</div>
+                     <div class="event-time"><i class="fas fa-clock"></i> 3:00 PM</div>
+                     <div class="event-location"><i class="fas fa-location-dot"></i> 4th Space</div>
+                     <div class="accordion-arrow"><i class="fas fa-chevron-down"></i></div>
+                     <!-- MOVED INSIDE -->
+                     <div class="accordion-content">
+                        A one-hour podcast episode featuring Professor Onur Kuzgunkaya. The discussion will focus on Lean Manufacturing: what it is, how it’s applied in real-life industry settings, and its relevance in today’s engineering landscape.
+                     </div>
+                  </li>
+               </ul>
+            </div>
+         </section>
+      </main>
+      <!-- FOOTER -->
+      <footer class="site-footer">
+         <div class="footer-content">
+            <div class="footer-left">
+               <img src="assets/logo.png" alt="IISE Logo" class="footer-logo">
+               <span class="footer-name">IISE Concordia</span>
+            </div>
+            <div class="footer-right">
+               <div class="footer-socials">
+                  <a href="https://www.instagram.com/iiseconcordiachapter/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                  <a href="https://www.facebook.com/people/IISE-Concordia-Chapter-IISE-Chapitre-Concordia/61560653019252/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                  <a href="https://www.linkedin.com/company/iiseconcordiachapter/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                  <a href="https://www.tiktok.com/@iise.concordia?is_from_webapp=1&sender_device=pc" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                  <a href="https://www.youtube.com/@IISEConcordiaChapter" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                  <a href="mailto:webmaster@iiseconcordia.com" target="_blank" aria-label="Email"><i class="fas fa-envelope"></i></a>
+               </div>
+               <div class="footer-copy">
+                  &copy; 2025-2026 IISE Concordia Chapter. All rights reserved.
+               </div>
+            </div>
+         </div>
+      </footer>
+      <script src="script.js"></script>
+      <script>
+         document.querySelectorAll('.podcast-item').forEach((item, index) => {
+           const content = item.querySelector('.accordion-content');
+           const arrowIcon = item.querySelector('.accordion-arrow i');
+           const title = item.querySelector('.event-title');
+         
+           item.addEventListener('click', (e) => {
+             // Do nothing if user clicked the title
+             if (e.target === title || title.contains(e.target)) return;
+         
+             content.classList.toggle('show');
+             arrowIcon.classList.toggle('rotated');
+           });
+         });
+           
+      </script>
+   </body>
+</html>

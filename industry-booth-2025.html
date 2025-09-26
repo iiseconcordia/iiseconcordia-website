@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>Industry Booth 2025</title>
+      <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+      <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+      <link rel="shortcut icon" href="favicon/favicon.ico" />
+      <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+      <link rel="manifest" href="favicon/site.webmanifest" />
+      <link rel="stylesheet" href="styles.css" />
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+      <style>
+         .industry-booth-section {
+         padding: 2.5rem 1rem 1rem 1rem;
+         color: #333;
+         }
+         .industry-booth-title {
+         font-family: 'Inter', sans-serif;
+         font-size: 3.5rem;
+         font-weight: bold;
+         margin: 0;
+         text-align: center;
+         color: #82283d;
+         }
+         .industry-booth-layout {
+         display: flex;
+         flex-wrap: wrap;
+         gap: 2rem;
+         max-width: 1200px;
+         margin: 2rem auto;
+         padding: 0 1rem;
+         }
+         .industry-booth-left {
+         flex: 1 1 280px;
+         }
+         .industry-booth-right {
+         flex: 2 1 600px;
+         }
+         .industry-booth-info p {
+         margin: 1.2rem 0;
+         line-height: 1.6;
+         font-size: 1rem;
+         }
+         .industry-booth-info strong {
+         display: inline-block;
+         margin-bottom: 0.25rem;
+         font-weight: 600;
+         color: #222;
+         }
+         .industry-booth-info span {
+         color: #82283d;
+         font-weight: 600;
+         }
+         .industry-booth-info a {
+         color: #82283d;
+         text-decoration: none;
+         }
+         .industry-booth-map iframe {
+         width: 100%;
+         height: 250px;
+         border: none;
+         }
+         .industry-booth-btn {
+         margin-top: 1.5rem;
+         background: #82283d;
+         color: white;
+         padding: 0.75rem 1.5rem;
+         border: none;
+         border-radius: 4px;
+         cursor: pointer;
+         font-weight: 600;
+         width: 100%;
+         }
+         .industry-booth-right img {
+         max-width: 100%;
+         display: block;
+         margin-bottom: 0.75rem;
+         }
+         .industry-booth-right figcaption {
+         text-align: center;
+         font-style: italic;
+         font-size: 0.95rem;
+         margin-bottom: 1rem;
+         color: #555;
+         }
+         .industry-booth-right p {
+         font-size: 1rem;
+         line-height: 1.6;
+         margin: 1rem 0;
+         }
+         .industry-booth-right h3 {
+         color: #82283d;
+         font-size: 2rem;
+         margin-top: 2rem;
+         text-align: left;
+         }
+         @media (max-width: 768px) {
+         .industry-booth-layout {
+         flex-direction: column;
+         padding: 0 1rem;
+         }
+         .industry-booth-title {
+         font-size: 1.6rem;
+         }
+         .industry-booth-right img {
+         width: 100%;
+         height: auto;
+         }
+         .industry-booth-btn {
+         width: 100%;
+         }
+         }
+      </style>
+   </head>
+   <body class="light-header podcast-page">
+      <!-- HEADER -->
+      <header class="site-header" role="banner">
+         <a class="iise" href="index.html">
+         <img class="iise-logo" src="assets/logo.png" alt="IISE Concordia logo">
+         <span class="iise-name">IISE Concordia</span>
+         </a>
+         <div class="edge-rail">
+            <button id="edgeMenuBtn" class="edge-menu">
+            <span class="hamburger"><span></span><span></span></span>
+            <span class="edge-menu-label">Menu</span>
+            </button>
+         </div>
+      </header>
+      <!-- OVERLAY -->
+      <div class="overlay" aria-hidden="true">
+         <div id="overlayHoverBg" class="overlay-hover-bg"></div>
+         <div id="overlayTint" class="overlay-tint-layer"></div>
+         <div class="overlay-inner">
+            <div class="overlay-header">
+               <a href="index.html" class="overlay-branding-link">
+                  <div class="overlay-branding">
+                     <img src="assets/logo.png" alt="Logo" class="overlay-logo" />
+                     <span class="overlay-name">IISE Concordia</span>
+                  </div>
+               </a>
+               <button class="overlay-close" aria-label="Close menu">&times;</button>
+            </div>
+            <div class="overlay-content">
+               <div class="overlay-column">
+                  <a href="about.html" data-bg="assets/menu/about.jpg">About</a>
+                  <a href="team-2024-2025.html" data-bg="assets/menu/team.jpg">The Team</a>
+                  <a href="sponsors.html" data-bg="assets/menu/sponsors.jpg">Sponsors</a>
+                  <a href="podcast.html" data-bg="assets/menu/podcast.png">INDU Talks</a>
+                  <!--<a href="/media.html" data-bg="assets/menu-bg-team.jpg">Media</a>-->
+               </div>
+               <div class="overlay-column">
+                  <!--<a href="#">Events</a>-->
+                  <a href="industry-week-2025.html" data-bg="assets/menu/indu-week.jpg">Industry Week</a>
+                  <a href="conference.html" data-bg="assets/menu/conference.png">Conference</a>
+                  <a href="competitions.html" data-bg="assets/menu/tech-paper-comp.png">Competitions</a>
+               </div>
+            </div>
+            <div class="overlay-footer social-links">
+               <a href="https://www.instagram.com/iiseconcordiachapter/" target="_blank" aria-label="Instagram">
+               <i class="fab fa-instagram"></i>
+               </a>
+               <a href="https://www.facebook.com/people/IISE-Concordia-Chapter-IISE-Chapitre-Concordia/61560653019252/" target="_blank" aria-label="Facebook">
+               <i class="fab fa-facebook"></i>
+               </a>
+               <a href="https://www.linkedin.com/company/iiseconcordiachapter/" target="_blank" aria-label="LinkedIn">
+               <i class="fab fa-linkedin"></i>
+               </a>
+               <a href="https://www.tiktok.com/@iise.concordia?is_from_webapp=1&sender_device=pc" target="_blank" aria-label="TikTok">
+               <i class="fab fa-tiktok"></i>
+               </a>
+               <a href="https://www.youtube.com/@IISEConcordiaChapter" target="_blank" aria-label="YouTube">
+               <i class="fab fa-youtube"></i>
+               </a>
+               <a href="mailto:webmaster@iiseconcordia.com" target="_blank" aria-label="Email">
+               <i class="fas fa-envelope"></i>
+               </a>
+            </div>
+         </div>
+      </div>
+      <main class="team-wrapper">
+         <section class="industry-booth-section">
+            <h1 class="industry-booth-title">"Industry Booth" Career Fair Networking Event</h1>
+         </section>
+         <section class="industry-booth-layout">
+            <!-- LEFT COLUMN -->
+            <div class="industry-booth-left">
+               <div class="industry-booth-info">
+                  <p>
+                     <strong><i class="fas fa-calendar-alt"></i> Date & Time</strong><br>
+                     Friday, October 3, 2025<br>
+                     5:30 p.m. – 7:30 p.m.<br>
+                     <!-- <span>Registration is closed</span></p> -->
+                  <p><strong><i class="fas fa-dollar-sign"></i> Cost</strong><br>This event is free</p>
+                  <p><strong><i class="fas fa-building"></i> Organization</strong><br>
+                     <a href="https://www.iiseconcordia.com" target="_blank">IISE Concordia Chapter</a>
+                  </p>
+                  <p><strong><i class="fas fa-phone-alt"></i> Contact</strong><br>
+                     <a href="mailto:social@iiseconcordia.com">VP Social</a>
+                  </p>
+                  <p><strong><i class="fas fa-map-marker-alt"></i> Where</strong><br>
+                     <a href="https://www.concordia.ca/maps/buildings/mb.html" target="_blank">John Molson Building</a><br>
+                     1450 Guy<br>
+                     Room 9D
+                  </p>
+                  <p><strong><i class="fas fa-wheelchair"></i> Accessible Location</strong><br>
+                     Yes – <a href="https://www.concordia.ca/hospitality/venues/concordia-conference-centre.html">See details</a>
+                  </p>
+               </div>
+               <div class="industry-booth-map">
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2795.137849123729!2d-73.57426428443674!3d45.49613427910171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc91a4697ab7e55%3A0xe3aefcf055420c2b!2sJohn%20Molson%20School%20of%20Business!5e0!3m2!1sen!2sca!4v1633020071445!5m2!1sen!2sca" loading="lazy"></iframe>
+               </div>
+            </div>
+            <!-- RIGHT COLUMN -->
+            <div class="industry-booth-right">
+               <img src="assets/industry-week-2025/industry-booth-2025.png" alt="Industry Week Schedule">
+               <figcaption>Industry Booth 2025</figcaption>
+               <h3>About Industry Booth</h3>
+               <p>The Industry Booth networking event offers the chance for students to chat with 
+                  top engineering companies who are deeply involved in the current and upcoming 
+                  recruiting space. These events are open to all programs and anyone is welcome to 
+                  compete or attend at these events.
+               </p>
+               <p>The main goals of this conference are to offer students academic and professional 
+                  advancement opportunities, and to facilitate our partners’ presence and recruitment 
+                  efforts within the engineering student community.
+               </p>
+               <h3>About Industry Week</h3>
+               <p>Industry Week 2025 is a week-long conference (Sep 29 – Oct 3) that takes place once 
+                  a year in partnership with major industry actors. This conference is composed of 
+                  many engaging events such as competitions, panels, workshops, plant and office tours, 
+                  and a networking event, all organized by IISE Concordia.
+               </p>
+               <p>These events offer amazing opportunities including a cash prize for the winning 
+                  case competition team, provided and judged by Tecsys Inc., a major healthcare consulting firm.
+               </p>
+               <p>Through this IISE Concordia initiative, the association aims at contributing to 
+                  the advancement of the industrial engineering field and all other connected 
+                  professional fields as well.
+               </p>
+            </div>
+         </section>
+      </main>
+      <!-- FOOTER -->
+      <footer class="site-footer">
+         <div class="footer-content">
+            <div class="footer-left">
+               <img src="assets/logo.png" alt="IISE Logo" class="footer-logo">
+               <span class="footer-name">IISE Concordia</span>
+            </div>
+            <div class="footer-right">
+               <div class="footer-socials">
+                  <a href="https://www.instagram.com/iiseconcordiachapter/" target="_blank"><i class="fab fa-instagram"></i></a>
+                  <a href="https://www.facebook.com/people/IISE-Concordia-Chapter-IISE-Chapitre-Concordia/61560653019252/" target="_blank"><i class="fab fa-facebook"></i></a>
+                  <a href="https://www.linkedin.com/company/iiseconcordiachapter/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                  <a href="https://www.tiktok.com/@iise.concordia" target="_blank"><i class="fab fa-tiktok"></i></a>
+                  <a href="https://www.youtube.com/@IISEConcordiaChapter" target="_blank"><i class="fab fa-youtube"></i></a>
+                  <a href="mailto:webmaster@iiseconcordia.com"><i class="fas fa-envelope"></i></a>
+               </div>
+               <div class="footer-copy">&copy; 2025–2026 IISE Concordia Chapter. All rights reserved.</div>
+            </div>
+         </div>
+      </footer>
+      <script src="script.js"></script>
+      <script>
+         document.querySelectorAll('.podcast-item').forEach((item, index) => {
+           const content = item.querySelector('.accordion-content');
+           const arrowIcon = item.querySelector('.accordion-arrow i');
+           const title = item.querySelector('.event-title');
+         
+           item.addEventListener('click', (e) => {
+             if (e.target === title || title.contains(e.target)) return;
+             content.classList.toggle('show');
+             arrowIcon.classList.toggle('rotated');
+           });
+         });
+      </script>
+   </body>
+</html>

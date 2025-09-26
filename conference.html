@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>IISE Concordia: Conference</title>
+      <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+      <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+      <link rel="shortcut icon" href="favicon/favicon.ico" />
+      <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+      <link rel="manifest" href="favicon/site.webmanifest" />
+      <link rel="stylesheet" href="styles.css" />
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+      <style>
+         .conference-page .our-mission {
+         padding: 3rem 1rem 1.5rem;
+         max-width: 1200px;
+         margin: 0 auto;
+         }
+         .conference-page .mission-title {
+         text-align: center;
+         font-size: 2.75rem;
+         font-weight: 800;
+         font-family: 'Playfair Display', serif;
+         margin-bottom: 2rem;
+         }
+         .conference-page .mission-wrap {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         gap: 2rem;
+         text-align: center;
+         }
+         .conference-page .mission-media img {
+         width: 100%;
+         max-width: 800px;
+         height: auto;
+         border-radius: 0;
+         }
+         .conference-page .mission-copy {
+         font-size: 1.05rem;
+         line-height: 1.6;
+         color: #333;
+         max-width: 900px;
+         }
+         .conference-page .events {
+         margin-top: 1rem;
+         }
+         .conference-page .events-grid.conference-item {
+         display: grid;
+         grid-template-columns: 100px 1fr auto auto auto auto;
+         align-items: stretch;
+         gap: 1rem;
+         border-top: 1px solid #e6e6e6;
+         cursor: pointer;
+         padding: 10px;
+         }
+         .conference-page .events-grid.conference-item img {
+         height: 100%;
+         width: 100%;
+         object-fit: cover;
+         border-radius: 0;
+         }
+         .conference-page .event-date,
+         .conference-page .event-time,
+         .conference-page .event-location {
+         font-size: 1rem;
+         display: flex;
+         align-items: center;
+         gap: 0.4rem;
+         color: #333;
+         white-space: nowrap;
+         }
+         .conference-page .event-date {
+         margin-left: auto;
+         }
+         .conference-page .event-title {
+         font-size: 1.1rem;
+         font-weight: 600;
+         color: #555;
+         text-decoration: none;
+         transition: color 0.3s ease;
+         pointer-events: auto;
+         align-self: center;
+         display: inline-block;
+         white-space: normal;
+         white-space: nowrap;
+         overflow: hidden;
+         text-overflow: ellipsis;
+         }
+         .conference-page .event-title:hover {
+         color: #82283d;
+         }
+         .conference-page .accordion-arrow {
+         font-size: 1.4rem;
+         display: flex;
+         justify-content: flex-end;
+         align-items: center;
+         color: #444;
+         padding-left: 3rem;
+         padding-right: 0.5rem;
+         }
+         .conference-page .accordion-arrow i.rotated {
+         transform: rotate(180deg);
+         transition: transform 0.3s ease;
+         }
+         .conference-page .accordion-content {
+         grid-column: 1 / -1;
+         display: none;
+         padding: 1rem 0 0;
+         font-size: 0.95rem;
+         color: #444;
+         line-height: 1.5;
+         }
+         .conference-page .accordion-content.show {
+         display: block;
+         }
+         .conference-page .section-title {
+         font-size: 3rem;
+         font-weight: 800;
+         font-family: 'Playfair Display', serif;
+         text-align: center;
+         margin-top: 1rem;
+         }
+         @media (max-width: 768px) {
+         .conference-page .events-grid.conference-item {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         gap: 0.75rem;
+         padding: 1.5rem 1rem;
+         text-align: center;
+         }
+         .conference-page .event-title {
+         font-size: 1.2rem;
+         font-weight: 600;
+         margin: 0.5rem 0;
+         color: #555;
+         }
+         .conference-page .event-date,
+         .conference-page .event-time,
+         .conference-page .event-location {
+         display: block;
+         text-align: center;
+         margin: 0;
+         font-size: 1rem;
+         color: #333;
+         }
+         .conference-page .accordion-arrow {
+         justify-content: center;
+         padding: 0.25rem;
+         }
+         }
+         .cta-outline {
+         display: inline-block;
+         padding: 0.6rem 1.5rem;
+         border: 2px solid #742b3b;
+         color: #742b3b;
+         font-weight: 600;
+         font-size: 1rem;
+         text-decoration: none;
+         border-radius: 999px; 
+         transition: background-color 0.3s ease, color 0.3s ease;
+         }
+         .cta-outline:hover {
+         background-color: #742b3b;
+         color: white;
+         }
+      </style>
+   </head>
+   <body class="light-header conference-page">
+      <!-- HEADER -->
+      <header class="site-header" role="banner">
+         <a class="iise" href="https://www.iiseconcordia.com">
+         <img class="iise-logo" src="assets/logo.png" alt="IISE Concordia logo">
+         <span class="iise-name">IISE Concordia</span>
+         </a>
+         <div class="edge-rail">
+            <button id="edgeMenuBtn" class="edge-menu" aria-haspopup="dialog" aria-controls="siteOverlay">
+            <span class="hamburger" aria-hidden="true">
+            <span></span>
+            <span></span>
+            </span>
+            <span class="edge-menu-label">Menu</span>
+            </button>
+         </div>
+      </header>
+      <!-- OVERLAY -->
+      <div class="overlay" aria-hidden="true">
+         <div id="overlayHoverBg" class="overlay-hover-bg"></div>
+         <div id="overlayTint" class="overlay-tint-layer"></div>
+         <div class="overlay-inner">
+            <div class="overlay-header">
+               <a href="index.html" class="overlay-branding-link">
+                  <div class="overlay-branding">
+                     <img src="assets/logo.png" alt="Logo" class="overlay-logo" />
+                     <span class="overlay-name">IISE Concordia</span>
+                  </div>
+               </a>
+               <button class="overlay-close" aria-label="Close menu">&times;</button>
+            </div>
+            <div class="overlay-content">
+               <div class="overlay-column">
+                  <a href="about.html" data-bg="assets/menu/about.jpg">About</a>
+                  <a href="team-2024-2025.html" data-bg="assets/menu/team.jpg">The Team</a>
+                  <a href="sponsors.html" data-bg="assets/menu/sponsors.jpg">Sponsors</a>
+                  <a href="podcast.html" data-bg="assets/menu/podcast.png">INDU Talks</a>
+                  <!--<a href="/media.html" data-bg="assets/menu-bg-team.jpg">Media</a>-->
+               </div>
+               <div class="overlay-column">
+                  <!--<a href="#">Events</a>-->
+                  <a href="industry-week-2025.html" data-bg="assets/menu/indu-week.jpg">Industry Week</a>
+                  <a href="conference.html" data-bg="assets/menu/conference.png">Conference</a>
+                  <a href="competitions.html" data-bg="assets/menu/tech-paper-comp.png">Competitions</a>
+               </div>
+            </div>
+            <div class="overlay-footer social-links">
+               <a href="https://www.instagram.com/iiseconcordiachapter/" target="_blank" aria-label="Instagram">
+               <i class="fab fa-instagram"></i>
+               </a>
+               <a href="https://www.facebook.com/people/IISE-Concordia-Chapter-IISE-Chapitre-Concordia/61560653019252/" target="_blank" aria-label="Facebook">
+               <i class="fab fa-facebook"></i>
+               </a>
+               <a href="https://www.linkedin.com/company/iiseconcordiachapter/" target="_blank" aria-label="LinkedIn">
+               <i class="fab fa-linkedin"></i>
+               </a>
+               <a href="https://www.tiktok.com/@iise.concordia?is_from_webapp=1&sender_device=pc" target="_blank" aria-label="TikTok">
+               <i class="fab fa-tiktok"></i>
+               </a>
+               <a href="https://www.youtube.com/@IISEConcordiaChapter" target="_blank" aria-label="YouTube">
+               <i class="fab fa-youtube"></i>
+               </a>
+               <a href="mailto:webmaster@iiseconcordia.com" target="_blank" aria-label="Email">
+               <i class="fas fa-envelope"></i>
+               </a>
+            </div>
+         </div>
+      </div>
+      <main class="team-wrapper">
+         <!-- OUR MISSION -->
+         <section class="our-mission" id="mission">
+            <h2 class="section-title">Conference</h2>
+            <div class="mission-wrap">
+               <div class="mission-copy">
+                  <p>
+                     Once a year, a Canadian University in the East Coast hosts a 3-day 
+                     conference where 400 students get to meet multiple professionals from 
+                     various companies and compete in academic competitions.
+                  </p>
+                  <p>
+                     This conference invites over 10 different universities with 40 students 
+                     each to interact with professionals. Guest speakers showcase their companies 
+                     and different aspects of their jobs. It is an amazing opportunity to meet 
+                     people and to expand one’s network. Social events are held in the evenings, 
+                     such as the Wine and Cheese, which allows students to meet professionals 
+                     and peers from different universities.  
+                  </p>
+                  <p>
+                     Each university selects one representative team of students to participate 
+                     in the Academic Competitions (Case Competition, Simulation Competition, 
+                     Theoretical Exam & Technical Paper). And finally, each year new surprise 
+                     competitions are held by the hosting University. 
+                  </p>
+               </div>
+               <figure class="mission-media">
+                  <img src="assets/conference/conference-map.png" alt="Students at an IISE Concordia event">
+               </figure>
+            </div>
+         </section>
+         <!-- UPCOMING EVENTS -->
+         <section class="events">
+            <div class="events-wrap">
+               <h2 class="section-title">Upcoming</h2>
+               <ul class="events-list conference-page">
+                  <li class="events-grid conference-item">
+                     <a class="event-title" href="#">Conference Info Session 2025</a>
+                     <div class="event-date"><i class="fas fa-calendar"></i> Sept 30, 2025</div>
+                     <div class="event-time"><i class="fas fa-clock"></i> 7:30 PM</div>
+                     <div class="event-location"><i class="fas fa-location-dot"></i> Online</div>
+                     <div class="accordion-arrow"><i class="fas fa-chevron-down"></i></div>
+                     <div class="accordion-content">
+                        Had questions about the conference? We have the answers! 
+                        All info about attending the conference will be announced: pricing, dates, events, etc. 
+                        <p>
+                        <p>
+                           <a href="conference-info-2025.html" class="cta-outline">Learn More</a>
+                        </p>
+                        </p>
+                     </div>
+                  </li>
+               </ul>
+            </div>
+         </section>
+      </main>
+      <!-- FOOTER -->
+      <footer class="site-footer">
+         <div class="footer-content">
+            <div class="footer-left">
+               <img src="assets/logo.png" alt="IISE Logo" class="footer-logo">
+               <span class="footer-name">IISE Concordia</span>
+            </div>
+            <div class="footer-right">
+               <div class="footer-socials">
+                  <a href="https://www.instagram.com/iiseconcordiachapter/" target="_blank"><i class="fab fa-instagram"></i></a>
+                  <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook"></i></a>
+                  <a href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                  <a href="https://www.tiktok.com/" target="_blank"><i class="fab fa-tiktok"></i></a>
+                  <a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a>
+                  <a href="mailto:webmaster@iiseconcordia.com"><i class="fas fa-envelope"></i></a>
+               </div>
+               <div class="footer-copy">&copy; 2025–2026 IISE Concordia Chapter. All rights reserved.</div>
+            </div>
+         </div>
+      </footer>
+      <script src="script.js"></script>
+      <!-- ACCORDION SCRIPT -->
+      <script>
+         if (document.body.classList.contains("conference-page")) {
+           document.querySelectorAll('.conference-item').forEach((item) => {
+             const content = item.querySelector('.accordion-content');
+             const arrowIcon = item.querySelector('.accordion-arrow i');
+             const title = item.querySelector('.event-title');
+         
+             item.addEventListener('click', (e) => {
+               if (e.target === title || title.contains(e.target)) return;
+               content.classList.toggle('show');
+               arrowIcon.classList.toggle('rotated');
+             });
+           });
+         }
+      </script>
+   </body>
+</html>
