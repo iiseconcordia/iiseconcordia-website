@@ -1671,6 +1671,8 @@ body.industry-page header.industry-header.hide-header {
 	color: white;
 }
 
+
+
 #industry-schedule {
 	background-color: #000;
 	color: white;
@@ -1878,6 +1880,10 @@ body.industry-page header.industry-header.hide-header {
 
 .industry-footer-copy {
 	margin-top: 0.5rem;
+}
+
+.industry-accordion h1 {
+	margin-top: 3rem;
 }
 
 .cta-list {
@@ -2363,7 +2369,7 @@ h3,
 	}
 
 	.industry-accordion h1 {
-		margin-top: 5rem;
+		margin-top: 0rem;
 	}
 
 	.industry-accordion p {
