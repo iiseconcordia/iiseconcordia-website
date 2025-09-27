@@ -2668,11 +2668,11 @@ h3,
 
   .mission-left-label,
   .mission-right-link {
-    font-size: 0.9rem; /* or smaller like 0.8rem if needed */
+    font-size: 0.9rem;
   }
 
   .mission-header {
-    margin-bottom: 2rem; /* optional: reduce bottom space */
+    margin-bottom: 2rem;
   }
 
 }
