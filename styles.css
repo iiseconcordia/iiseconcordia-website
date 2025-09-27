@@ -2407,5 +2407,27 @@ h3,
 		margin-top: 1rem;
 	}
 
+	@media (max-width: 768px) {
+  .site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+  }
+
+  .site-header .logo {
+    max-width: 120px;
+    height: auto;
+  }
+
+  .site-header .menu-button {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .site-header .menu-button i {
+    font-size: 1.25rem;
+  }
+}
 
 }
