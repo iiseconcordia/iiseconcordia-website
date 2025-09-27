@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
    });
 
    // === HEADER SCROLL ===
-const mainHeader = document.querySelector('.site-header:not(.scroll-header)');
+   const mainHeader = document.querySelector('.site-header:not(.scroll-header)');
 const scrollHeader = document.querySelector('.scroll-header');
 let lastScrollTop = 0;
 
@@ -148,30 +148,27 @@ if (!document.body.classList.contains('light-header')) {
   window.addEventListener('scroll', () => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-    // === DESKTOP: Only show mainHeader, do nothing else ===
-    if (!isMobile()) {
-      mainHeader?.classList.remove('hidden');
-      scrollHeader?.classList.remove('scrolled', 'hidden');
-      return;
-    }
-
-    // === MOBILE: Scroll behavior ===
-    if (scrollTop === 0) {
-      scrollHeader?.classList.remove('scrolled', 'hidden');
-    } else {
-      if (scrollTop > lastScrollTop) {
-        // scrolling down
-        scrollHeader?.classList.add('hidden');
+    if (isMobile()) {
+      // === MOBILE ONLY SCROLL LOGIC ===
+      if (scrollTop === 0) {
+        scrollHeader?.classList.remove('scrolled', 'hidden');
       } else {
-        // scrolling up
-        scrollHeader?.classList.add('scrolled');
-        scrollHeader?.classList.remove('hidden');
+        if (scrollTop > lastScrollTop) {
+          scrollHeader?.classList.add('hidden'); // scrolling down
+        } else {
+          scrollHeader?.classList.add('scrolled');
+          scrollHeader?.classList.remove('hidden'); // scrolling up
+        }
       }
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    } else {
+      // DESKTOP: DO NOTHING
+      scrollHeader?.classList.remove('scrolled');
+      scrollHeader?.classList.add('hidden');
     }
-
-    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
   });
 } else {
+  // Light header case (static behavior)
   mainHeader?.classList.add('scrolled');
   mainHeader?.classList.remove('hidden');
   scrollHeader?.classList.add('scrolled');
