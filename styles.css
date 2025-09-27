@@ -871,7 +871,7 @@ main {
 	margin: 0;
 	font-family: "Playfair Display", Georgia, serif;
 	font-weight: 700;
-	font-size: clamp(1.25rem, 5vw, 3.4rem);
+	font-size: clamp(2rem, 5vw, 3.25rem);
 	line-height: 1.0;
 }
 
@@ -1046,7 +1046,7 @@ main {
 	margin: 40px 0 48px 0;
 	font-family: "Playfair Display", Georgia, serif;
 	font-weight: 700;
-	font-size: clamp(1.25rem, 5vw, 3.4rem);
+	font-size: clamp(2rem, 5vw, 3.25rem);
 	line-height: 1.0;
 }
 
