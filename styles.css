@@ -2472,19 +2472,19 @@ h3,
   .overlay-content {
     display: flex;
     flex-direction: column;
-    align-items: left;
+    align-items: flex-start !important;
     gap: 0rem;
     padding: 2rem 1rem;
   }
 
   .overlay-column {
     width: 100%;
-    align-items: center;
+    align-items: flex-start !important;
   }
 
   .overlay-column a {
     font-size: 1.4rem; 
-    text-align: left;
+    text-align: left !important;
     padding: 0.6rem 1.5rem;
     margin: 0;
     border: 2px solid transparent;
@@ -2506,4 +2506,16 @@ h3,
   .overlay-footer.social-links a {
     font-size: 1.5rem;
   }
+
+  .page-title {
+    font-size: 2.5rem; 
+    line-height: 1.1;
+  }
+
+  .year-btn {
+    font-size: 1.5rem; 
+    padding: 0.6rem 1.5rem;
+    border-width: 2px;
+  }
+
 }
