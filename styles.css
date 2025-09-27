@@ -2683,4 +2683,11 @@ h3,
     padding: 0 1.5rem;
   }
 
+    .sponsors-header {
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+  }
+
 }
