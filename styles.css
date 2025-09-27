@@ -2629,12 +2629,18 @@ h3,
     height: auto !important;
   }
 
-  .snap-section {
+  .industry-scroll-container .snap-section {
     scroll-snap-align: none !important;
     scroll-snap-stop: normal !important;
     height: auto !important;
     min-height: 100vh !important;
+    flex-shrink: 0 !important;
     flex: none !important;
+  }
+
+  .industry-page,
+  .industry-content-wrapper {
+    height: auto !important;
   }
 
 }
