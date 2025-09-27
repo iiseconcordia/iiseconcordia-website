@@ -136,37 +136,30 @@ document.addEventListener("DOMContentLoaded", () => {
    });
 
    // === HEADER SCROLL ===
-const mainHeader = document.querySelector('.site-header:not(.scroll-header)');
-const scrollHeader = document.querySelector('.scroll-header');
-let lastScrollTop = 0;
+   const header = document.querySelector('.site-header');
+   let lastScrollTop = 0;
 
-if (!document.body.classList.contains('light-header')) {
-   window.addEventListener('scroll', () => {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+   if (!document.body.classList.contains('light-header')) {
+      window.addEventListener('scroll', () => {
+         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-      if (scrollTop === 0) {
-         mainHeader.classList.remove('scrolled', 'hidden');
-         scrollHeader.classList.remove('scrolled', 'hidden');
-      } else {
-         mainHeader.classList.add('scrolled');
-         if (scrollTop > lastScrollTop) {
-            mainHeader.classList.add('hidden');
-            scrollHeader.classList.add('hidden');
+         if (scrollTop === 0) {
+            header.classList.remove('scrolled', 'hidden');
          } else {
-            mainHeader.classList.remove('hidden');
-            scrollHeader.classList.add('scrolled');
-            scrollHeader.classList.remove('hidden');
+            header.classList.add('scrolled');
+            if (scrollTop > lastScrollTop) {
+               header.classList.add('hidden');
+            } else {
+               header.classList.remove('hidden');
+            }
          }
-      }
 
-      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-   });
-} else {
-   mainHeader.classList.add('scrolled');
-   mainHeader.classList.remove('hidden');
-   scrollHeader.classList.add('scrolled');
-   scrollHeader.classList.remove('hidden');
-}
+         lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+      });
+   } else {
+      header.classList.add('scrolled');
+      header.classList.remove('hidden');
+   }
 
    // === OVERLAY LINK HOVER ===
    const hoverBg = document.getElementById("overlayHoverBg");
