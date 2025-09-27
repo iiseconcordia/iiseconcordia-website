@@ -136,43 +136,36 @@ document.addEventListener("DOMContentLoaded", () => {
    });
 
    // === HEADER SCROLL ===
-   const mainHeader = document.querySelector('.site-header:not(.scroll-header)');
+const mainHeader = document.querySelector('.site-header:not(.scroll-header)');
 const scrollHeader = document.querySelector('.scroll-header');
 let lastScrollTop = 0;
 
-function isMobile() {
-  return window.innerWidth <= 768;
-}
-
 if (!document.body.classList.contains('light-header')) {
-  window.addEventListener('scroll', () => {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+   window.addEventListener('scroll', () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-    if (isMobile()) {
-      // === MOBILE ONLY SCROLL LOGIC ===
       if (scrollTop === 0) {
-        scrollHeader?.classList.remove('scrolled', 'hidden');
+         mainHeader.classList.remove('scrolled', 'hidden');
+         scrollHeader.classList.remove('scrolled', 'hidden');
       } else {
-        if (scrollTop > lastScrollTop) {
-          scrollHeader?.classList.add('hidden'); // scrolling down
-        } else {
-          scrollHeader?.classList.add('scrolled');
-          scrollHeader?.classList.remove('hidden'); // scrolling up
-        }
+         mainHeader.classList.add('scrolled');
+         if (scrollTop > lastScrollTop) {
+            mainHeader.classList.add('hidden');
+            scrollHeader.classList.add('hidden');
+         } else {
+            mainHeader.classList.remove('hidden');
+            scrollHeader.classList.add('scrolled');
+            scrollHeader.classList.remove('hidden');
+         }
       }
+
       lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-    } else {
-      // DESKTOP: DO NOTHING
-      scrollHeader?.classList.remove('scrolled');
-      scrollHeader?.classList.add('hidden');
-    }
-  });
+   });
 } else {
-  // Light header case (static behavior)
-  mainHeader?.classList.add('scrolled');
-  mainHeader?.classList.remove('hidden');
-  scrollHeader?.classList.add('scrolled');
-  scrollHeader?.classList.remove('hidden');
+   mainHeader.classList.add('scrolled');
+   mainHeader.classList.remove('hidden');
+   scrollHeader.classList.add('scrolled');
+   scrollHeader.classList.remove('hidden');
 }
 
    // === OVERLAY LINK HOVER ===
