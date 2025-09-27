@@ -2484,7 +2484,7 @@ h3,
 
   .overlay-column a {
     font-size: 1.4rem; 
-    text-align: center;
+    text-align: left;
     padding: 0.6rem 1.5rem;
     margin: 0;
     border: 2px solid transparent;
