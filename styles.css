@@ -1883,7 +1883,7 @@ body.industry-page header.industry-header.hide-header {
 }
 
 .industry-accordion h1 {
-	margin-top: 3rem;
+	margin-top: 4rem;
 }
 
 .cta-list {
@@ -2172,6 +2172,10 @@ h3,
 		padding-right: 20px;
 		font-size: 0.5rem;
 	}
+	.industry-accordion h1 {
+		margin-top: 0rem;
+	}
+
 
 }
 
@@ -2345,6 +2349,10 @@ h3,
 		top: 1rem;
 		right: 1rem;
 	}
+	.industry-accordion h1 {
+		margin-top: 0rem;
+	}
+
 }
 
 @media (max-width: 880px) {
@@ -2599,7 +2607,7 @@ h3,
 
   .industry-accordion h1 {
     font-size: 2rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0rem;
   }
 
   .industry-accordion h2 {
