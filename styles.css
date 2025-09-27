@@ -2407,7 +2407,9 @@ h3,
 		margin-top: 1rem;
 	}
 
-	@media (max-width: 768px) {
+}
+
+@media (max-width: 768px) {
   .site-header {
     display: flex;
     justify-content: space-between;
@@ -2428,6 +2430,4 @@ h3,
   .site-header .menu-button i {
     font-size: 1.25rem;
   }
-}
-
 }
