@@ -2621,4 +2621,15 @@ h3,
     flex-wrap: wrap;
   }
 
+    .industry-scroll-container {
+    scroll-snap-type: none !important;
+    overflow-y: auto !important;
+  }
+
+  .snap-section {
+    height: auto !important;
+    min-height: auto !important;
+    scroll-snap-align: none !important;
+  }
+
 }
