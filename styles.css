@@ -2561,4 +2561,64 @@ h3,
     width: 100%;
   }
 
+    .industry-layout {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    gap: 2rem;
+  }
+
+  .industry-image {
+    max-width: 100%;
+    width: 100%;
+    padding: 0;
+  }
+
+  .industry-image img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+  }
+
+  .industry-accordion {
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .industry-accordion h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .industry-accordion h2 {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .cta-list {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    padding: 0;
+  }
+
+  .cta-list li a {
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .industry-footer-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .industry-footer-right {
+    align-items: center;
+  }
+
+  .industry-footer-socials {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
 }
