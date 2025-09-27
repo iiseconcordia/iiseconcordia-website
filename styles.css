@@ -2675,4 +2675,12 @@ h3,
     margin-bottom: 2rem;
   }
 
+  .sponsorship-title-section {
+    padding: 0 1.5rem; /* adds 24px side padding */
+  }
+
+  .invitation-section {
+    padding: 0 1.5rem; /* same for the paragraph section below */
+  }
+
 }
