@@ -2666,4 +2666,13 @@ h3,
     box-shadow: none !important;
   }
 
+  .mission-left-label,
+  .mission-right-link {
+    font-size: 0.9rem; /* or smaller like 0.8rem if needed */
+  }
+
+  .mission-header {
+    margin-bottom: 2rem; /* optional: reduce bottom space */
+  }
+
 }
