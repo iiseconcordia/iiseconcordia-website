@@ -1546,6 +1546,11 @@ body,
 .industry-page footer {
 	margin-top: auto;
 }
+body.industry-page header.industry-header.hide-header {
+  display: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
 
 #industry-hero {
 	position: relative;
@@ -2396,7 +2401,6 @@ h3,
 		font-size: 2rem;
 	}
 
-	/* Adjusts hero title on mobile */
 	.industry-hero h1 {
 		font-size: 2rem;
 		text-align: center;
@@ -2641,6 +2645,11 @@ h3,
   .industry-page,
   .industry-content-wrapper {
     height: auto !important;
+  }
+
+    body.industry-page .site-header {
+    border-bottom: none !important;
+    box-shadow: none !important;
   }
 
 }

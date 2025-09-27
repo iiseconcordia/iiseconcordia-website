@@ -15,15 +15,16 @@
    </head>
    <body class="industry-page light-header2">
       <!-- HEADER -->
-      <div class="edge-rail">
-         <button id="edgeMenuBtn" class="edge-menu" aria-haspopup="dialog" aria-controls="siteOverlay">
-         <span class="hamburger" aria-hidden="true">
-         <span></span>
-         <span></span>
-         </span>
-         <span class="edge-menu-label">Menu</span>
-         </button>
-      </div>
+       <header class="site-header industry-header" id="industryHeader">
+         <div class="edge-rail">
+            <button id="edgeMenuBtn" class="edge-menu" aria-haspopup="dialog" aria-controls="siteOverlay">
+            <span class="hamburger" aria-hidden="true">
+            <span></span>
+            <span></span>
+            </span>
+            <span class="edge-menu-label">Menu</span>
+            </button>
+         </div>
       </header>
       <!-- OVERLAY -->
       <div class="overlay" aria-hidden="true">
@@ -161,5 +162,31 @@
          </section>
          <script src="script.js"></script>
       </main>
+      <script>
+      document.addEventListener("DOMContentLoaded", () => {
+      if (document.body.classList.contains("industry-page")) {
+         const menuBtn = document.querySelector(".edge-menu");
+         const firstSection = document.querySelector(".snap-section");
+
+         const observer = new IntersectionObserver(
+            ([entry]) => {
+            if (entry.isIntersecting) {
+               menuBtn.classList.remove("hide-menu");
+            } else {
+               menuBtn.classList.add("hide-menu");
+            }
+            },
+            {
+            root: null,
+            threshold: 0.5
+            }
+         );
+
+         if (firstSection && menuBtn) {
+            observer.observe(firstSection);
+         }
+      }
+      });
+      </script>
    </body>
 </html>
