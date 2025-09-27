@@ -187,8 +187,8 @@
          color: #555;
          display: grid;
          grid-template-columns: 0.5fr 0.5fr;
-         column-gap: 1.5rem; /* ↓ reduced from 1.5rem */
-         row-gap: 0.5rem;     /* optional: tighter vertical spacing */
+         column-gap: 1.5rem;
+         row-gap: 0.5rem;  
          line-height: 1.5;
          text-align: left;
          }
@@ -239,7 +239,7 @@
          justify-content: center;
          }
          .tier-content h3 {
-         margin: 0 auto;
+         margin: 0 auto 1rem auto; 
          text-align: center;
          font-size: 1.2rem;
          text-transform: uppercase;
@@ -333,21 +333,40 @@
          align-items: flex-start !important;
          }
          .tier {
+         display: flex !important;
          flex-direction: column !important;
          align-items: center !important;
          text-align: center !important;
+         gap: 1rem !important;
          }
+
          .tier-number {
-         margin-bottom: 1rem;
+         margin-bottom: 0.5rem;
          }
+
          .tier-content {
-         align-items: flex-start;
-         text-align: left;
+         align-items: left !important;
+         text-align: left !important;
          }
-         .tier-content p {
-         justify-content: flex-start;
-         text-align: left;
+
+
+         .competition-item.with-image .competition-features {
+         grid-template-columns: 1fr !important;
+         column-gap: 0 !important;
+         row-gap: 0.5rem !important;
+         justify-items: flex-start !important;
+         text-align: center !important;
          }
+
+         .tier-content h3 {
+         margin: 0 auto 1rem auto; 
+         text-align: center;
+         font-size: 1.2rem;
+         text-transform: uppercase;
+         color: #7c2639;
+         letter-spacing: 1px;
+         }
+
          }
       </style>
    </head>
