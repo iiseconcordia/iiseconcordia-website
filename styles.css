@@ -2415,12 +2415,16 @@ h3,
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem 0.75rem;
-    background-color: white; /* optional: keep it consistent */
+    background-color: transparent; 
   }
 
-  .site-header .logo {
-    max-width: 90px;
+  .iise-logo {
+    max-height: 45px;
     height: auto;
+  }
+
+  .iise-name {
+    font-size: 1.2rem;
   }
 
   .site-header .menu-button {
@@ -2431,10 +2435,10 @@ h3,
   }
 
   .site-header .menu-button span {
-    display: none; /* Hides the "Menu" text on smaller screens */
+    display: none; 
   }
 
   .site-header .menu-button i {
-    font-size: 1.5rem; /* Larger icon for easier tapping */
+    font-size: 1.6rem;
   }
 }
