@@ -2531,4 +2531,28 @@ h3,
     font-size: 1.6rem;
   }
 
+    .jamon-grid {
+    display: block; 
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+
+  .jamon-grid table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .jamon-grid .label-cell,
+  .jamon-grid .value-cell {
+    padding: 0.75rem 1rem;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .jamon-grid .sponsor-header img {
+    max-width: 70px;
+    height: auto;
+  }
+
 }
