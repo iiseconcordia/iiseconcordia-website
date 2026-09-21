@@ -3,11 +3,11 @@ document.addEventListener("DOMContentLoaded", () => {
    const slides = [{
       image: "assets/hero_indu-booth2.jpg",
       titleTop: "Industry Week",
-      titleBottom: "2025",
+      titleBottom: "2026",
       desc: "Competitions, Panels, Workshops, Plant/Office Tours, and Networking",
       cta: {
          text: "Learn more",
-         href: "industry-week-2025.html"
+         href: "industry-week-2026.html"
       },
       wash: 0,
       position: 'center 100%'
@@ -351,7 +351,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
    // === INDUSTRY WEEK COUNTDOWN ===
    function updateIndustryCountdown() {
-      const targetDate = new Date("2025-09-29T00:00:00");
+      const targetDate = new Date("2026-10-05T00:00:00");
 
       function update() {
          const now = new Date();

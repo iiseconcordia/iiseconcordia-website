@@ -962,6 +962,15 @@ main {
 	background: transparent;
 }
 
+.event-title--static {
+	cursor: default;
+	color: #3a3a3a;
+}
+
+.event-title--static:hover {
+	border-color: transparent;
+}
+
 
 .our-mission+.events .events-wrap {
 	margin-top: 24px;
@@ -1812,6 +1821,127 @@ body.industry-page header.industry-header.hide-header {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
+}
+
+/* --------- INDUSTRY WEEK SCHEDULE GRID ---------------*/
+
+.industry-schedule {
+	max-width: 55%;
+	width: 100%;
+	padding: 2rem;
+	box-sizing: border-box;
+	color: white;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.iw-schedule-title {
+	margin: 0;
+}
+
+.iw-schedule-dates {
+	margin: 0.25rem 0 1.25rem;
+	font-style: italic;
+	color: #bdbdbd;
+}
+
+.iw-week {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	gap: 0.75rem;
+}
+
+.iw-day {
+	border: 1px solid #2e2e2e;
+	border-radius: 0.5rem;
+	background-color: #121212;
+	overflow: hidden;
+}
+
+.iw-day-name {
+	margin: 0;
+	padding: 0.6rem 0.75rem;
+	background-color: #82283d;
+	font-size: 0.95rem;
+	font-weight: 700;
+	text-align: center;
+}
+
+.iw-day-name span {
+	display: block;
+	font-weight: 400;
+	font-size: 0.85rem;
+	opacity: 0.9;
+}
+
+.iw-events {
+	list-style: none;
+	margin: 0;
+	padding: 0.75rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	font-size: 0.9rem;
+	line-height: 1.35;
+}
+
+.iw-time {
+	display: block;
+	font-weight: 700;
+}
+
+.iw-events a {
+	color: white;
+	text-decoration: none;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+	transition: all 0.2s ease;
+}
+
+.iw-events a:hover {
+	color: #e0899b;
+	border-bottom-color: #e0899b;
+}
+
+.iw-note {
+	margin: 0;
+	padding: 0 0.75rem 0.75rem;
+	font-size: 0.8rem;
+	font-style: italic;
+	color: #bdbdbd;
+}
+
+@media (max-width: 1200px) {
+	.iw-week {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+@media (max-width: 880px) {
+	.industry-schedule {
+		max-width: 100%;
+		padding: 1rem;
+		overflow-y: visible;
+	}
+
+	.iw-schedule-title,
+	.iw-schedule-dates {
+		text-align: center;
+	}
+
+	.iw-week {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 560px) {
+	.iw-week {
+		grid-template-columns: 1fr;
+	}
 }
 
 .industry-accordion h2 {
