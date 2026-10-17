@@ -351,7 +351,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
    // === INDUSTRY WEEK COUNTDOWN ===
    function updateIndustryCountdown() {
-      const targetDate = new Date("2026-10-05T00:00:00");
+      const targetDate = new Date("2026-10-20T00:00:00");
 
       function update() {
          const now = new Date();

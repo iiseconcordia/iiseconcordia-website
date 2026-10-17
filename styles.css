@@ -2821,3 +2821,32 @@ h3,
   }
 
 }
+/* --------- EVENT PAGE: DISABLED CTA + LIMITED SPOTS ---------------*/
+
+/* Specificity must beat the .cta-outline-btn rule in each page's inline <style>. */
+.cta-outline-btn.disabled-btn,
+a.disabled-btn,
+span.disabled-btn {
+	color: #6b6b6b;
+	border-color: #c4c4c4;
+	cursor: not-allowed;
+}
+
+.cta-outline-btn.disabled-btn:hover,
+a.disabled-btn:hover,
+span.disabled-btn:hover {
+	background-color: transparent;
+	color: #6b6b6b;
+	border-color: #c4c4c4;
+}
+
+.limited-spots-note {
+	display: inline-block;
+	margin: 0.75rem 0 0;
+	padding: 0.4rem 0.9rem;
+	border-radius: 999px;
+	background-color: #82283d;
+	color: #fff;
+	font-weight: 600;
+	font-size: 0.9rem;
+}
