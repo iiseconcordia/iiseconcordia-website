@@ -2850,3 +2850,24 @@ span.disabled-btn:hover {
 	font-weight: 600;
 	font-size: 0.9rem;
 }
+
+/* --------- CONFERENCE POSTER ---------------*/
+
+.conference-poster {
+	margin: 0 auto;
+	max-width: 520px;
+	text-align: center;
+}
+
+.conference-poster img {
+	width: 100%;
+	height: auto;
+	display: block;
+	border-radius: 0.5rem;
+}
+
+.conference-poster figcaption {
+	margin-top: 0.75rem;
+	font-size: 0.95rem;
+	color: #555;
+}
