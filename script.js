@@ -351,33 +351,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
    // === INDUSTRY WEEK COUNTDOWN ===
    function updateIndustryCountdown() {
+      // The countdown markup lives only on the Industry Week page. script.js is
+      // loaded site-wide, so bail out everywhere else: without this the interval
+      // runs on all 21 pages and throws once a second once the date has passed.
+      const boxes = {
+         days: document.getElementById("days"),
+         hours: document.getElementById("hours"),
+         minutes: document.getElementById("minutes"),
+         seconds: document.getElementById("seconds"),
+      };
+
+      if (!boxes.days || !boxes.hours || !boxes.minutes || !boxes.seconds) return;
+
       const targetDate = new Date("2026-10-20T00:00:00");
+      let timer;
+
+      function render(values) {
+         Object.keys(boxes).forEach((key) => {
+            boxes[key].textContent = String(values[key]).padStart(2, '0');
+         });
+      }
 
       function update() {
-         const now = new Date();
-         const diff = targetDate - now;
+         const diff = targetDate - new Date();
 
          if (diff <= 0) {
-            document.getElementById("days").textContent = "00";
-            document.getElementById("hours").textContent = "00";
-            document.getElementById("minutes").textContent = "00";
-            document.getElementById("seconds").textContent = "00";
-            clearInterval(timer); // ✅ stop updating
+            render({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+            clearInterval(timer); // stop updating
             return;
          }
 
-         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-         const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-         const minutes = Math.floor((diff / (1000 * 60)) % 60);
-         const seconds = Math.floor((diff / 1000) % 60);
-
-         document.getElementById("days").textContent = String(days).padStart(2, '0');
-         document.getElementById("hours").textContent = String(hours).padStart(2, '0');
-         document.getElementById("minutes").textContent = String(minutes).padStart(2, '0');
-         document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
+         render({
+            days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+            hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+            minutes: Math.floor((diff / (1000 * 60)) % 60),
+            seconds: Math.floor((diff / 1000) % 60),
+         });
       }
 
-      const timer = setInterval(update, 1000);
+      timer = setInterval(update, 1000);
       update(); // initial call
    }
 
