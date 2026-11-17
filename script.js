@@ -189,9 +189,9 @@ document.addEventListener("DOMContentLoaded", () => {
    const dropdown = document.getElementById("yearDropdown");
    const yearItems = document.querySelectorAll(".year-item");
 
-   // Load default team for 2024–2025
+   // Each team page declares its year on #teamGrid (data-year)
    if (teamGrid) {
-      loadTeam("2024-2025");
+      loadTeam(teamGrid.dataset.year || "2024-2025");
 
       // Dropdown toggle
       yearBtn?.addEventListener("click", (e) => {
@@ -251,8 +251,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const img = document.createElement("img");
       img.src = member.image;
-      img.alt = member.name;
+      img.alt = `Photo of ${member.name}, ${member.title}`;
       img.className = "member-img";
+      img.addEventListener("error", () => {
+         if (!img.dataset.fallback) {
+            img.dataset.fallback = "1";
+            img.src = "team-page/placeholder.svg";
+         }
+      });
 
       const bioText = document.createElement("div");
       bioText.className = "bio-text";
@@ -293,13 +299,18 @@ document.addEventListener("DOMContentLoaded", () => {
          iconWrap.appendChild(linkedinIcon);
       }
 
-      if (member.email) {
+      const emails = Array.isArray(member.email)
+         ? member.email
+         : (member.email ? [member.email] : []);
+
+      emails.forEach((address) => {
          const emailIcon = document.createElement("a");
-         emailIcon.href = `mailto:${member.email}`;
-         emailIcon.setAttribute("aria-label", "Email");
+         emailIcon.href = `mailto:${address}`;
+         emailIcon.setAttribute("aria-label", `Email ${member.name} at ${address}`);
+         emailIcon.title = address;
          emailIcon.innerHTML = `<i class="fas fa-envelope"></i>`;
          iconWrap.appendChild(emailIcon);
-      }
+      });
 
       const bioButton = document.createElement("button");
       bioButton.className = "bio-btn";
